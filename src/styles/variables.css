@@ -1,0 +1,51 @@
+
+:root {
+  /* Brand colours */
+  --color-primary: #101f3c;          /* Deep Navy — navbar, footer, headings */
+  --color-accent: #e53935;           /* Cargo Red — CTAs, highlights */
+  --color-primary-dark: #0a1529;     /* Deeper navy — utility bar */
+  --color-accent-dark: #c62828;      /* Cargo Red hover */
+
+  /* Neutral colours */
+  --color-white: #ffffff;
+  --color-background: #f3f5f8;       /* Light Grey — section backgrounds */
+  --color-text: #252d3a;
+  --color-muted: #687386;
+  --color-border: #e5e9ef;
+
+  /* Transparent whites (for text / lines on navy) */
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-16: rgba(255, 255, 255, 0.16);
+  --color-white-08: rgba(255, 255, 255, 0.08);
+
+  /* Typography */
+  --font-primary: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace; /* labels, buttons */
+
+  /* Layout */
+  --container-width: 1200px;
+  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --utility-bar-height: 40px;
+  --navbar-height: 84px;
+  --header-total-height: calc(var(--utility-bar-height) + var(--navbar-height));
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Effects */
+  --transition: 0.3s ease;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 160ms;
+  --duration-normal: 400ms;
+  --shadow: 0 8px 30px rgba(16, 31, 60, 0.08);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --navbar-height: 72px;
+    --utility-bar-height: 36px;
+  }
+}

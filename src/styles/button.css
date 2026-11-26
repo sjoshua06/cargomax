@@ -1,0 +1,107 @@
+/* Split CTA button — shared across all pages */
+.btn {
+  --btn-bg: var(--color-accent);
+  --btn-bg-hover: var(--color-accent-dark);
+  --btn-fg: var(--color-white);
+
+  display: inline-flex;
+  align-items: stretch;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--btn-fg);
+  cursor: pointer;
+}
+
+.btn--navy {
+  --btn-bg: var(--color-primary);
+  --btn-bg-hover: var(--color-primary-dark);
+  --btn-fg: var(--color-white);
+}
+
+.btn--light {
+  --btn-bg: var(--color-white);
+  --btn-bg-hover: var(--color-background);
+  --btn-fg: var(--color-primary);
+}
+
+.btn__label,
+.btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--btn-bg);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.btn__label {
+  padding: 0 18px;
+  min-height: 46px;
+}
+
+.btn__icon {
+  width: 46px;
+  min-height: 46px;
+}
+
+.btn:hover .btn__label,
+.btn:hover .btn__icon {
+  background: var(--btn-bg-hover);
+}
+
+/* Text roll: two stacked copies, slide up on hover */
+.btn__roll {
+  display: grid;
+  height: 1.5em;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.btn__roll > span {
+  grid-area: 1 / 1;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.btn__roll > span:last-child {
+  transform: translateY(110%);
+}
+
+.btn:hover .btn__roll > span:first-child {
+  transform: translateY(-110%);
+}
+
+.btn:hover .btn__roll > span:last-child {
+  transform: translateY(0);
+}
+
+/* Arrow slide: two arrows, the first flies out top-right, the second flies in */
+.btn__arrows {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.btn__arrows svg {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.btn__arrows svg:last-child {
+  transform: translate(-120%, 120%);
+}
+
+.btn:hover .btn__arrows svg:first-child {
+  transform: translate(120%, -120%);
+}
+
+.btn:hover .btn__arrows svg:last-child {
+  transform: translate(0, 0);
+}
