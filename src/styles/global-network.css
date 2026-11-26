@@ -1,0 +1,413 @@
+/* =========================================================
+   Global Network section — CargoHype-inspired globe + hubs
+   ========================================================= */
+
+.network-section {
+  background: var(--color-background);
+  padding-top: clamp(64px, 8vw, 112px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  overflow: hidden;
+}
+
+/* Shared section eyebrow badge */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 10px rgba(16, 31, 60, 0.04);
+  flex-shrink: 0;
+}
+
+.section-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.section-badge__text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+/* ---------- Top header ---------- */
+.network-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.network-head__right {
+  flex: 1;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.network-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: clamp(2rem, 4.4vw, 3.65rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
+}
+
+.network-title__line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.network-title__pill {
+  width: clamp(64px, 6.2vw, 92px);
+  height: clamp(34px, 3.4vw, 50px);
+  border-radius: 999px;
+  object-fit: cover;
+  display: inline-block;
+  box-shadow: 0 6px 18px rgba(16, 31, 60, 0.14);
+}
+
+.network-summary {
+  margin-top: 20px;
+  max-width: 600px;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.2vw, 1.075rem);
+  line-height: 1.65;
+}
+
+.network-cta {
+  margin-top: 28px;
+}
+
+/* ---------- Globe map stage ---------- */
+.network-map-stage {
+  margin-top: clamp(24px, 4vw, 48px);
+}
+
+.network-map-frame {
+  position: relative;
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.network-map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Blends the pure white background of gloabe.png into #F3F5F8 seamlessly */
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+  transition:
+    opacity 700ms var(--ease-standard),
+    transform 700ms var(--ease-standard);
+}
+
+.network-map-stage.is-visible .network-map-image {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ---------- Floating hub anchors & cards ---------- */
+.hub-anchor {
+  position: absolute;
+  z-index: 3;
+  width: 0;
+  height: 0;
+}
+
+.hub-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  border: 2px solid var(--color-white);
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.22);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 420ms var(--ease-standard);
+  transition-delay: calc(var(--i) * 110ms + 160ms);
+}
+
+.network-map-stage.is-visible .hub-dot {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Subtle pulsing ring on the Chennai origin hub */
+.hub-anchor.is-origin .hub-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  border: 2px solid var(--color-accent);
+  opacity: 0;
+  animation: hub-pulse 2.4s ease-out infinite;
+}
+
+@keyframes hub-pulse {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+.hub-card {
+  position: absolute;
+  width: max-content;
+  min-width: 190px;
+  max-width: 245px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 36px rgba(16, 31, 60, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transition:
+    opacity 500ms var(--ease-standard),
+    transform 500ms var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+  transition-delay: calc(var(--i) * 110ms + 240ms);
+}
+
+.hub-anchor.is-origin .hub-card {
+  border-color: rgba(229, 57, 53, 0.45);
+}
+
+/* Pointer triangle */
+.hub-card::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--color-white);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Placement: above the dot */
+.hub-anchor--above .hub-card {
+  left: 0;
+  bottom: 18px;
+  transform: translate(-50%, 10px) scale(0.95);
+}
+
+.hub-anchor--above .hub-card::after {
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.network-map-stage.is-visible .hub-anchor--above .hub-card {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Placement: below the dot (Colombo — keeps clear of Chennai) */
+.hub-anchor--below .hub-card {
+  left: 0;
+  top: 18px;
+  transform: translate(-50%, -10px) scale(0.95);
+}
+
+.hub-anchor--below .hub-card::after {
+  left: 50%;
+  top: -6px;
+  transform: translateX(-50%) rotate(-135deg);
+}
+
+.network-map-stage.is-visible .hub-anchor--below .hub-card {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Placement: below and shifted right (Europe — stays inside left edge) */
+.hub-anchor--below-right .hub-card {
+  left: -18px;
+  top: 18px;
+  transform: translate(0, -10px) scale(0.95);
+}
+
+.hub-anchor--below-right .hub-card::after {
+  left: 18px;
+  top: -6px;
+  transform: translateX(-50%) rotate(-135deg);
+}
+
+.network-map-stage.is-visible .hub-anchor--below-right .hub-card {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+.hub-anchor:hover {
+  z-index: 6;
+}
+
+.hub-anchor:hover .hub-card {
+  border-color: var(--color-accent);
+  box-shadow: 0 24px 44px rgba(16, 31, 60, 0.16);
+}
+
+.hub-card__role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.hub-anchor.is-origin .hub-card__role,
+.hub-card--static.is-origin .hub-card__role {
+  color: var(--color-accent);
+}
+
+.hub-card__title {
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.hub-card__detail {
+  font-size: 12px;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+/* ---------- Bottom gradient & stats strip ---------- */
+.network-stats-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding-top: clamp(48px, 8vw, 120px);
+  padding-bottom: clamp(16px, 2.5vw, 32px);
+  background: linear-gradient(
+    180deg,
+    rgba(243, 245, 248, 0) 0%,
+    rgba(243, 245, 248, 0.92) 72%,
+    var(--color-background) 100%
+  );
+  z-index: 4;
+}
+
+.network-stats-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 32px;
+}
+
+.network-stats-item {
+  font-size: clamp(0.875rem, 1.15vw, 1rem);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* ---------- Mobile fallback hub grid ---------- */
+.network-mobile-hubs {
+  display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .network-head {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hub-card {
+    min-width: 160px;
+    padding: 9px 12px;
+  }
+
+  .hub-card__title {
+    font-size: 14px;
+  }
+
+  .hub-card__detail {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .hub-anchor .hub-card {
+    display: none;
+  }
+
+  .network-stats-overlay {
+    position: static;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    background: none;
+  }
+
+  .network-stats-list {
+    justify-content: flex-start;
+    gap: 8px 20px;
+  }
+
+  .network-mobile-hubs {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .network-mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .hub-card--static {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    opacity: 1;
+    transform: none;
+    box-shadow: 0 6px 20px rgba(16, 31, 60, 0.06);
+  }
+
+  .hub-card--static::after {
+    display: none;
+  }
+
+  .hub-card--static .hub-card__detail {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .network-mobile-grid {
+    grid-template-columns: 1fr;
+  }
+}
