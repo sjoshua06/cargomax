@@ -13,8 +13,8 @@ function Contact() {
   return (
     <main className="page-offset">
       <ContactHero />
-      <ContactMethods />
       <QuoteForm />
+      <ContactMethods />
       <OfficeLocations />
       <ContactCta />
     </main>

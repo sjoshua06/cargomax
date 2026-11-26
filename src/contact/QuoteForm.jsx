@@ -31,6 +31,7 @@ const INITIAL_VALUES = {
   freightMode: "",
   readyDate: "",
   message: "",
+  _honey: "",
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -132,12 +133,28 @@ function QuoteForm() {
     setStatus({ type: "loading", message: "Sending your enquiry…" });
 
     try {
+      const fullName = `${values.firstName} ${values.lastName}`.trim();
+      const payload = {
+        ...values,
+        _subject: `New CargoMax Quote Request — ${fullName}`,
+        _replyto: values.email.trim(),
+        _template: "table",
+      };
+
       const res = await fetch(QUOTE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error(String(res.status));
+
+      const data = await res.json().catch(() => null);
+      if (data && (data.success === false || data.success === "false")) {
+        throw new Error(data.message || "Form submission rejected");
+      }
 
       setValues(INITIAL_VALUES);
       setTouched({});
@@ -327,6 +344,18 @@ function QuoteForm() {
                   min={today}
                 />
               </div>
+
+              {/* Honeypot field for FormSubmit spam protection */}
+              <input
+                type="text"
+                name="_honey"
+                value={values._honey}
+                onChange={handleChange}
+                className="visually-hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
 
               {/* Message */}
               <FormField
