@@ -1,0 +1,170 @@
+/* =========================================================
+   Landing Hero — full-bleed background video + CargoMax CTA
+   ========================================================= */
+
+.home-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--header-total-height);
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+/* ---------- Background video & dark navy readability veil ---------- */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 21, 41, 0.72) 0%,
+      rgba(10, 21, 41, 0.42) 38%,
+      rgba(10, 21, 41, 0.68) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(16, 31, 60, 0.72) 0%,
+      rgba(16, 31, 60, 0.28) 55%,
+      rgba(16, 31, 60, 0.1) 100%
+    );
+}
+
+/* ---------- Foreground layout ---------- */
+.hero-container {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: clamp(48px, 10vh, 112px);
+  padding-bottom: clamp(28px, 4vh, 44px);
+  gap: 48px;
+}
+
+.hero-content {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.hero-title {
+  color: var(--color-white);
+  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.hero-summary {
+  max-width: 540px;
+  color: var(--color-white-80);
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.65;
+}
+
+.hero-actions {
+  margin-top: 8px;
+}
+
+/* ---------- Bottom row: scroll cue + video play/pause ---------- */
+.hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hero-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-white-80);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.hero-scroll__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--color-white-16);
+  background: var(--color-white-08);
+  transition:
+    transform var(--duration-normal) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.hero-scroll:hover {
+  color: var(--color-white);
+}
+
+.hero-scroll:hover .hero-scroll__icon {
+  border-color: var(--color-accent);
+  transform: translateY(3px);
+}
+
+.hero-video-toggle {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-white-16);
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: var(--color-white);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.hero-video-toggle:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .home-hero {
+    min-height: 92svh;
+  }
+
+  .hero-container {
+    padding-top: 40px;
+    padding-bottom: 24px;
+  }
+
+  .hero-content {
+    gap: 18px;
+  }
+}
