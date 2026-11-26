@@ -1,0 +1,48 @@
+/* Shared section heading — eyebrow + title + description */
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 640px;
+}
+
+.section-heading--center {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.section-heading__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.section-heading--light .section-heading__eyebrow {
+  color: var(--color-white-80);
+}
+
+.section-heading__title {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  color: var(--color-primary);
+}
+
+.section-heading--light .section-heading__title {
+  color: var(--color-white);
+}
+
+.section-heading__description {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 540px;
+}
+
+.section-heading--light .section-heading__description {
+  color: var(--color-white-80);
+}

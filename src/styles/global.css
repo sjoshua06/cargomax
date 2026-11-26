@@ -24,6 +24,7 @@ body.menu-open {
 
 button,
 input,
+select,
 textarea {
   font: inherit;
 }
