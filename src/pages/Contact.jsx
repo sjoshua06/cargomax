@@ -11,7 +11,7 @@ function Contact() {
   useDocumentTitle("Contact Us");
 
   return (
-    <main className="page-offset">
+    <main>
       <ContactHero />
       <QuoteForm />
       <ContactMethods />

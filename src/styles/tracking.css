@@ -1,0 +1,302 @@
+/* =========================================================
+   Tracking page styles
+   ========================================================= */
+
+/* ---------- 1. Hero (with background photo + dark navy overlay) ---------- */
+.tracking-hero {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--header-total-height) + clamp(56px, 8vw, 96px)) 0
+    clamp(56px, 8vw, 96px);
+  background: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.tracking-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tracking-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 21, 41, 0.78) 0%,
+    rgba(16, 31, 60, 0.86) 100%
+  );
+}
+
+.tracking-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.tracking-hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white-80);
+}
+
+.tracking-hero__title {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  color: var(--color-white);
+  line-height: 1.1;
+}
+
+.tracking-hero__text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-white-80);
+  max-width: 540px;
+}
+
+/* ---------- 2. Main Grid ---------- */
+.tracking-section {
+  padding: clamp(56px, 8vw, 96px) 0;
+  background: var(--color-background);
+}
+
+.tracking-grid {
+  display: grid;
+  grid-template-columns: 7fr minmax(280px, 5fr);
+  gap: 32px;
+  align-items: start;
+}
+
+/* Left: Form Card */
+.tracking-form-card {
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tracking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tracking-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tracking-form__submit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 32px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.tracking-form__submit:hover:not(:disabled) {
+  background: var(--color-accent-dark);
+}
+
+.tracking-form__submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.tracking-form__status {
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.tracking-form__status.is-error {
+  background: rgba(198, 40, 40, 0.06);
+  color: #c62828;
+}
+
+.tracking-form__status.is-success {
+  background: rgba(22, 121, 74, 0.06);
+  color: #16794a;
+}
+
+.tracking-form__status.is-info,
+.tracking-form__status.is-loading {
+  background: rgba(36, 74, 145, 0.06);
+  color: var(--color-primary);
+}
+
+/* ---------- 3. Sidebar ---------- */
+.tracking-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tracking-info-card,
+.tracking-support-card {
+  padding: 28px;
+  border-radius: var(--radius-md);
+}
+
+.tracking-info-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+}
+
+.tracking-info-card__eyebrow,
+.tracking-support-card__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tracking-info-card__eyebrow {
+  color: var(--color-accent);
+}
+
+.tracking-info-card__title {
+  font-size: 22px;
+  color: var(--color-primary);
+  margin-bottom: 24px;
+}
+
+.tracking-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tracking-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.tracking-step__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(229, 57, 53, 0.08);
+  color: var(--color-accent);
+}
+
+.tracking-step__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.tracking-step__text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+/* Urgent Support Card */
+.tracking-support-card {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.tracking-support-card__eyebrow {
+  color: var(--color-white-80);
+}
+
+.tracking-support-card__title {
+  font-size: 22px;
+  color: var(--color-white);
+  margin-bottom: 8px;
+}
+
+.tracking-support-card__text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-white-80);
+  margin-bottom: 20px;
+}
+
+.tracking-support-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tracking-support-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--color-white-80);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.tracking-support-link svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.tracking-support-link strong {
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.tracking-support-link:hover {
+  color: var(--color-white);
+}
+
+/* ---------- 4. Responsive ---------- */
+@media (max-width: 900px) {
+  .tracking-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-form__row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tracking-form__submit {
+    width: 100%;
+  }
+}

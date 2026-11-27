@@ -9,7 +9,7 @@ import "../../styles/navbar.css";
 
 // Routes whose top section is a full-bleed dark hero (video / image).
 // On these routes the navbar starts transparent and turns white on scroll.
-const HERO_ROUTES = new Set(["/"]);
+const HERO_ROUTES = new Set(["/", "/contact", "/tracking"]);
 
 const SCROLL_THRESHOLD = 24;
 

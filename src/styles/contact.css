@@ -14,7 +14,8 @@
 .contact-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(64px, 9vw, 112px) 0;
+  padding: calc(var(--header-total-height) + clamp(56px, 8vw, 96px)) 0
+    clamp(56px, 8vw, 96px);
   background: var(--color-primary);
 }
 
