@@ -1,23 +1,21 @@
 /* =========================================================
-   Automatic infinite logo marquee — modelled on CargoHype
+   Static Partner / Accreditation Cards — matches Services grid
    ========================================================= */
 
-.marquee-section {
+.companies-section {
   background: var(--color-background);
-  padding: clamp(40px, 5vw, 64px) 0;
+  padding: clamp(48px, 6vw, 80px) 0;
   border-bottom: 1px solid var(--color-border);
-  overflow: hidden;
   scroll-margin-top: var(--navbar-height);
 }
 
 /* ---------- Centered pill badge ---------- */
-.marquee-badge-wrap {
+.companies-badge-wrap {
   display: flex;
   justify-content: center;
-  padding: 0 var(--page-gutter);
 }
 
-.marquee-badge {
+.companies-badge {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -28,7 +26,7 @@
   box-shadow: 0 2px 10px rgba(16, 31, 60, 0.04);
 }
 
-.marquee-badge__dot {
+.companies-badge__dot {
   width: 8px;
   height: 8px;
   border-radius: 999px;
@@ -36,7 +34,7 @@
   flex-shrink: 0;
 }
 
-.marquee-badge__text {
+.companies-badge__text {
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 500;
@@ -47,136 +45,142 @@
   white-space: nowrap;
 }
 
-/* ---------- Marquee rail & edge fades ---------- */
-.marquee-viewport {
-  position: relative;
+/* ---------- Static 5-card grid ---------- */
+.companies-grid {
   margin-top: clamp(28px, 4vw, 44px);
-  width: 100%;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
 }
 
-.marquee-fade {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: clamp(48px, 14vw, 220px);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.marquee-fade--left {
-  left: 0;
-  background: linear-gradient(90deg, var(--color-background) 15%, rgba(243, 245, 248, 0) 100%);
-}
-
-.marquee-fade--right {
-  right: 0;
-  background: linear-gradient(270deg, var(--color-background) 15%, rgba(243, 245, 248, 0) 100%);
-}
-
-.marquee-rail {
+.company-card {
   display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: marquee-scroll 34s linear infinite;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 500ms var(--ease-standard),
+    transform 500ms var(--ease-standard),
+    border-color var(--duration-normal) var(--ease-standard),
+    box-shadow var(--duration-normal) var(--ease-standard);
+  transition-delay: calc(var(--i) * 80ms), calc(var(--i) * 80ms), 0s, 0s;
 }
 
-.marquee-viewport:hover .marquee-rail {
-  animation-play-state: paused;
+.companies-grid.is-visible .company-card {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.marquee-track {
+.company-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 18px 36px rgba(16, 31, 60, 0.09);
+  transform: translateY(-4px);
+}
+
+/* Top bar: dot + index number */
+.company-card__top {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
-  gap: clamp(48px, 6vw, 96px);
-  padding-right: clamp(48px, 6vw, 96px);
+  gap: 8px;
 }
 
-.marquee-item {
+.company-card__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-border);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.company-card:hover .company-card__dot {
+  background: var(--color-accent);
+}
+
+.company-card__number {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* Uniform logo box — keeps wide & square logos balanced */
+.company-card__media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  background: var(--color-background);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  height: 48px;
+  overflow: hidden;
 }
 
-/* Compact, uniform visual weight across all 4 company logos */
-.marquee-logo {
-  max-height: 40px;
-  max-width: 155px;
+.company-card__logo {
+  max-width: 100%;
+  max-height: 76px;
   width: auto;
   height: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
-  opacity: 0.86;
-  transition: opacity var(--duration-fast) var(--ease-standard);
+  transition: transform var(--duration-normal) var(--ease-standard);
 }
 
-/* Trim the thin outer grey frame on mto.jpg so the oval emblem floats cleanly */
-.marquee-logo--trim {
-  max-height: 44px;
+/* Trim the thin outer grey frame on mto.jpg */
+.company-card__logo--trim {
+  max-height: 88px;
   clip-path: inset(3px);
 }
 
-.marquee-item:hover .marquee-logo {
-  opacity: 1;
+.company-card:hover .company-card__logo {
+  transform: scale(1.05);
 }
 
-@keyframes marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
+/* Text block */
+.company-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.company-card__title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-primary);
+}
+
+.company-card__desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-muted);
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 900px) {
-  .marquee-logo {
-    max-height: 34px;
-    max-width: 132px;
-  }
-
-  .marquee-logo--trim {
-    max-height: 38px;
+@media (max-width: 1120px) {
+  .companies-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 640px) {
-  .marquee-badge__text {
+@media (max-width: 720px) {
+  .companies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .companies-badge__text {
     font-size: 11px;
   }
-
-  .marquee-item {
-    height: 38px;
-  }
-
-  .marquee-logo {
-    max-height: 28px;
-    max-width: 112px;
-  }
-
-  .marquee-logo--trim {
-    max-height: 32px;
-  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee-rail {
-    animation: none;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .marquee-track[aria-hidden="true"] {
-    display: none;
-  }
-
-  .marquee-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-right: 0;
+@media (max-width: 460px) {
+  .companies-grid {
+    grid-template-columns: 1fr;
   }
 }

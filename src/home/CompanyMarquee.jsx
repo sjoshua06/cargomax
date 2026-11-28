@@ -1,55 +1,88 @@
+import { useEffect, useRef, useState } from "react";
+
 import { trustedCompanies } from "../data/home";
 import "../styles/marquee.css";
 
-// Repeat the 4 logos 3x per track so the strip stays wider than ultra-wide
-// viewports and loops seamlessly with zero gap.
-const TRACK_ITEMS = [
-  ...trustedCompanies.logos,
-  ...trustedCompanies.logos,
-  ...trustedCompanies.logos,
-];
-
-function LogoTrack({ hidden = false }) {
-  return (
-    <div className="marquee-track" aria-hidden={hidden || undefined}>
-      {TRACK_ITEMS.map((logo, index) => (
-        <div key={`${logo.name}-${index}`} className="marquee-item">
-          <img
-            src={logo.src}
-            alt={hidden ? "" : logo.name}
-            width={logo.width}
-            height={logo.height}
-            loading="lazy"
-            decoding="async"
-            className={`marquee-logo${logo.trimBorder ? " marquee-logo--trim" : ""}`}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function CompanyMarquee() {
+  const gridRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = gridRef.current;
+    if (!node) return undefined;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="trusted-companies"
-      className="marquee-section"
+      className="companies-section"
       aria-label={trustedCompanies.badge}
     >
-      <div className="marquee-badge-wrap">
-        <div className="marquee-badge">
-          <span className="marquee-badge__dot" aria-hidden="true" />
-          <span className="marquee-badge__text">{trustedCompanies.badge}</span>
+      <div className="container">
+        <div className="companies-badge-wrap">
+          <div className="companies-badge">
+            <span className="companies-badge__dot" aria-hidden="true" />
+            <span className="companies-badge__text">
+              {trustedCompanies.badge}
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className="marquee-viewport">
-        <div className="marquee-fade marquee-fade--left" aria-hidden="true" />
-        <div className="marquee-fade marquee-fade--right" aria-hidden="true" />
+        <div
+          ref={gridRef}
+          className={`companies-grid${visible ? " is-visible" : ""}`}
+        >
+          {trustedCompanies.logos.map((company, index) => (
+            <article
+              key={company.number}
+              className="company-card"
+              style={{ "--i": index }}
+            >
+              <div className="company-card__top">
+                <span className="company-card__dot" aria-hidden="true" />
+                <span className="company-card__number">{company.number}</span>
+              </div>
 
-        <div className="marquee-rail">
-          <LogoTrack />
-          <LogoTrack hidden />
+              <div className="company-card__media">
+                <img
+                  src={company.src}
+                  alt={company.title}
+                  width={company.width}
+                  height={company.height}
+                  loading="lazy"
+                  decoding="async"
+                  className={`company-card__logo${
+                    company.trimBorder ? " company-card__logo--trim" : ""
+                  }`}
+                />
+              </div>
+
+              <div className="company-card__body">
+                <h3 className="company-card__title">{company.title}</h3>
+                {company.description ? (
+                  <p className="company-card__desc">{company.description}</p>
+                ) : null}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

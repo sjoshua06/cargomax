@@ -92,7 +92,7 @@ function Navbar() {
 
       <div className="navbar">
         <div className="container nav-inner">
-          <Logo plate onClick={closeMenu} />
+          <Logo variant="swap" onClick={closeMenu} />
 
           <nav className="nav-menu" aria-label="Main">
             {mainNavLinks.map(({ label, to }) => (

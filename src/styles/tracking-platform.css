@@ -1,0 +1,88 @@
+/* =========================================================
+   Tracking Platform Showcase — "Every Container, One Screen."
+   ========================================================= */
+
+.platform-section {
+  background: var(--color-white);
+  padding: clamp(72px, 9vw, 120px) 0;
+}
+
+.platform-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+/* ---------- Left column ---------- */
+.platform-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 36px;
+}
+
+.platform-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.platform-title {
+  color: var(--color-primary);
+  font-size: clamp(2.15rem, 4.4vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  white-space: pre-line;
+}
+
+.platform-summary {
+  max-width: 480px;
+  color: var(--color-muted);
+  font-size: clamp(0.975rem, 1.2vw, 1.0625rem);
+  line-height: 1.65;
+}
+
+/* ---------- Right column: clean standalone image ---------- */
+.platform-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.platform-img {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+  transition:
+    opacity 650ms var(--ease-standard),
+    transform 650ms var(--ease-standard);
+}
+
+.platform-wrap.is-visible .platform-img {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .platform-wrap {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .platform-left {
+    gap: 28px;
+  }
+
+  .platform-summary {
+    max-width: 600px;
+  }
+}

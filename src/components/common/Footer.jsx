@@ -100,7 +100,7 @@ function Footer() {
         {/* ---------- Top: brand + contact | newsletter + socials ---------- */}
         <div className="footer-top">
           <div className="footer-brand-block">
-            <Logo plate />
+            <Logo variant="light" />
             <p className="footer-blurb">{companyInfo.blurb}</p>
 
             <div className="footer-contact-block">

@@ -14,33 +14,50 @@ export const heroContent = {
   scrollLabel: "Scroll to stay on route",
 };
 
+// Edit each card's `title` and `description` below to update the text on the page.
 export const trustedCompanies = {
   badge: "Trusted by leading companies",
   logos: [
     {
-      name: "JCtrans",
+      number: "01",
+      title: "JCTRANS",
+      description: "We’re a trusted logistics provider with a global reach, proudly registered on JC Trans. Connect with us for reliable and efficient freight forwarding solutions..",
       src: "/images/companies/jctrans.png",
-      width: 140,
-      height: 38,
+      width: 444,
+      height: 250,
     },
     {
-      name: "MSME — Micro, Small & Medium Enterprises",
+      number: "02",
+      title: "WCAworld",
+      description: "WCAworld is the world’s largest and most powerful network of independent freight forwarders, with over 13,356 member offices in 197 countries worldwide.",
+      src: "/images/companies/logo_wcaworld.png",
+      width: 350,
+      height: 130,
+    },
+    {
+      number: "03",
+      title: "MSME",
+      description: "We’re proud to be an MSME-certified enterprise, dedicated to innovation and growth. Partner with us to experience the dynamism of Indian micro, small, and medium businesses.",
       src: "/images/companies/msme.png",
-      width: 112,
-      height: 44,
+      width: 1280,
+      height: 540,
     },
     {
-      name: "MTO — Multimodal Transport Operator",
+      number: "04",
+      title: "MTO",
+      description: "We’re a licensed and MTO-registered transportation company, committed to safe and compliant operations. Count on us for your cargo needs.",
       src: "/images/companies/mto.jpg",
-      width: 72,
-      height: 48,
+      width: 300,
+      height: 300,
       trimBorder: true,
     },
     {
-      name: "Neptune Consol",
+      number: "05",
+      title: "Neptune Consol",
+      description: "Proudly a registered member of the NEPTUNE Network – Connecting globally for seamless NVOCC & LCL cargo solutions.",
       src: "/images/companies/neptune.png",
-      width: 156,
-      height: 36,
+      width: 531,
+      height: 116,
     },
   ],
 };
@@ -174,4 +191,58 @@ export const servicesPreviewContent = {
       to: "/services#customs",
     },
   ],
+};
+
+export const howWeWorkContent = {
+  badge: "SEC / 04 How we work",
+  title: "From quote to delivery in three moves.",
+  summary:
+    "A fixed sequence with no surprises — you'll know the status, the cost, and the ETA at every stage.",
+  cta: {
+    label: "Get a Quote",
+    to: "/contact",
+  },
+  steps: [
+    {
+      step: "Step 01",
+      title: "Plan",
+      description:
+        "Send us your shipment specs, and we’ll deliver a complete routing plan—covering transport mode, transit window, and total landed cost—within 24 business hours.",
+      image: "/images/working/plan.png",
+      alt: "CargoMax specialists planning a shipment route and landed cost quote",
+    },
+    {
+      step: "Step 02",
+      title: "Move",
+      description:
+        "We secure cargo space, handle all paperwork, and complete pre-arrival customs clearance while you monitor every milestone in real time.",
+      image: "/images/working/move.png",
+      alt: "Operations desk managing freight documentation and live shipment milestones",
+    },
+    {
+      step: "Step 03",
+      title: "Deliver",
+      description:
+        "Doorstep final-mile drop-off with verified proof of delivery, wrapped up in one clear, all-inclusive invoice with zero surprise fees.",
+      image: "/images/working/deliver.png",
+      alt: "CargoMax delivery specialist capturing digital proof of delivery at the doorstep",
+    },
+  ],
+};
+
+export const trackingPlatformContent = {
+  badge: "SEC / 05 The platform",
+  title: "Every Container,\nOne Screen.",
+  summary:
+    "Track shipments across carriers in real time, pull customs documents in two clicks, and get exception alerts before they become delays. Your whole team, your whole supply chain, one login.",
+  cta: {
+    label: "Track Shipment",
+    to: "/tracking",
+  },
+  image: {
+    src: "/images/tracking-preview/shipment-status.jpg",
+    alt: "CargoMax shipment tracking panel showing container number, vessel, live position, customs clearance, ETA and schedule status",
+    width: 1024,
+    height: 764,
+  },
 };

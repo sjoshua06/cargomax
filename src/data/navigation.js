@@ -23,7 +23,7 @@ export const utilityItems = [
 
 export const companyInfo = {
   blurb:
-    "Reliable freight forwarding with one point of contact and full visibility — from Chennai to the world.",
+    "Reliable freight forwarding with one point of contact and full visibility — from India to the world.",
   email: "info@cargomax.co.in", // TODO: confirm official email
   phones: [
     { display: "+91 96000 12841", href: "tel:+919600012841" },

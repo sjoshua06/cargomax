@@ -84,32 +84,48 @@
   gap: 24px;
 }
 
-/* ---------- Logo ---------- */
+/* ---------- Logo (white at rest → blue on scroll) ---------- */
 .brand-link {
-  display: flex;
+  display: inline-grid;
   align-items: center;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  transition:
-    background-color var(--duration-normal) var(--ease-standard),
-    padding var(--duration-normal) var(--ease-standard);
-}
-
-.brand-link--plate {
-  background: var(--color-white);
-  padding: 6px 12px;
-}
-
-.site-header.is-scrolled:not(.is-open) .brand-link--plate {
-  background: transparent;
-  padding: 6px 0;
 }
 
 .brand-logo {
-  height: 40px;
+  grid-area: 1 / 1;
+  height: 92px;
   width: auto;
-  max-width: 600px;
+  max-width: 310px;
+  object-fit: contain;
+  background: var(--color-white);
+  border-radius: var(--radius-sm);
+  transition: opacity var(--duration-normal) var(--ease-standard);
+}
 
+.brand-logo--light {
+  filter: drop-shadow(0 2px 8px rgba(10, 21, 41, 0.35));
+}
+
+.brand-logo--dark {
+  filter: saturate(1.14) contrast(1.06);
+}
+
+/* Swap mode in Navbar: white at rest (or when mobile menu is open), blue when scrolled */
+.brand-link--swap .brand-logo--light {
+  opacity: 1;
+}
+
+.brand-link--swap .brand-logo--dark {
+  opacity: 0;
+}
+
+.site-header.is-scrolled:not(.is-open) .brand-link--swap .brand-logo--light {
+  opacity: 0;
+}
+
+.site-header.is-scrolled:not(.is-open) .brand-link--swap .brand-logo--dark {
+  opacity: 1;
 }
 
 /* ---------- Glass link pill ---------- */
@@ -129,8 +145,11 @@
 }
 
 .site-header.is-scrolled .nav-menu {
-  background: var(--color-background);
-  border-color: var(--color-border);
+  background: transparent;
+  border-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  padding-inline: 0;
 }
 
 .nav-link {
@@ -232,7 +251,8 @@
   }
 
   .brand-logo {
-    height: 34px;
+    height: 76px;
+    max-width: 250px;
   }
 
   .mobile-nav {
@@ -312,5 +332,12 @@
 @media (max-width: 640px) {
   .utility-item.hide-mobile {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-logo {
+    height: 64px;
+    max-width: 210px;
   }
 }

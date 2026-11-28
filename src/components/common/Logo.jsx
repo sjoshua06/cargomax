@@ -1,26 +1,44 @@
 import { Link } from "react-router-dom";
 
+const WHITE_LOGO = "logo/logo-png.png";
+const BLUE_LOGO = "/logo/logo-png.png";
+
 /**
- * CargoMax logo (public/logo/logo.png).
- * `plate` puts the logo on a small white card so a dark-coloured logo
- * stays visible on navy backgrounds.
+ * CargoMax logo (3:1 ratio).
+ * - variant="swap"  : white logo at rest, smoothly swaps to blue logo when scrolled (Navbar)
+ * - variant="light" : white logo only (dark navy backgrounds like Footer)
+ * - variant="dark"  : blue logo only (light backgrounds)
  */
-function Logo({ plate = false, className = "", onClick }) {
+function Logo({ variant = "swap", className = "", onClick }) {
   return (
     <Link
       to="/"
-      className={`brand-link ${plate ? "brand-link--plate" : ""} ${className}`.trim()}
+      className={`brand-link brand-link--${variant} ${className}`.trim()}
       aria-label="CargoMax — home"
       onClick={onClick}
     >
-      <img
-        src="/logo/image.png"
-        alt="CargoMax"
-        width="150"
-        height="44"
-        className="brand-logo"
-        decoding="async"
-      />
+      {variant !== "dark" ? (
+        <img
+          src={WHITE_LOGO}
+          alt="CargoMax — We Serve With Passion"
+          width="276"
+          height="92"
+          className="brand-logo brand-logo--light"
+          decoding="async"
+        />
+      ) : null}
+
+      {variant !== "light" ? (
+        <img
+          src={BLUE_LOGO}
+          alt={variant === "swap" ? "" : "CargoMax — We Serve With Passion"}
+          aria-hidden={variant === "swap" || undefined}
+          width="276"
+          height="92"
+          className="brand-logo brand-logo--dark"
+          decoding="async"
+        />
+      ) : null}
     </Link>
   );
 }
